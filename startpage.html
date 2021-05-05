@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startpage</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="child">
+            <div id="pagenr">[1] 2 3</div>
+            <div id="date"></div>
+            <div id="p1">
+                <img src="box.png" alt="">
+                <form id="input" action="https://duckduckgo.com/">
+                    <input type="text" name="q" autocomplete="off" placeholder="Type search query" autofocus><button
+                        type="submit">Search</button>
+                </form>
+            </div>
+            <div id="p2">
+                <ul class="bookmarks">
+                    <li><a href="https://4chan.org/g/catalog">/g/</a></li>
+                    <li><a href="https://4chan.org/wg/catalog">/wg/</a></li>
+                    <li><a href="https://4chan.org/wsg/catalog">/wsg/</a></li>
+                    <li><a href="https://4chan.org/mu/catalog">/mu/</a></li>
+                    <li><a href="https://4chan.org/3/catalog">/3/</a></li>
+                    <li><a href="https://4chan.org/x/catalog">/x/</a></li>
+                </uL>
+                <ul class="bookmarks">
+                    <li><a href="https://api.invidious.io/">invidious</a></li>
+                    <li><a href="https://www.wga.hu/">www.wga.hu</a></li>
+
+                </ul>
+                <ul class="bookmarks">
+                    <li><a href="https://archlinux.org/">arch linux</a></li>
+                    <li><a href="https://github.com">github</a></li>
+                </ul>
+                <ul class="bookmarks">
+                    <li><a href="https://gmail.com">mail</a></li>
+                </ul>
+            </div>
+            <div id="p3">
+                <h3>Arch Linux News</h3>
+                <div id="feed-textarea">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js"></script>
+<script>
+    // RSS READER
+    let url = 'https://archlinux.org/feeds/news'; // change this to change news source
+    const textarea = document.querySelector('#feed-textarea > ul');
+    const date = new Date();
+    document.querySelector('#date').innerText = date.toDateString();
+
+    feednami.load(url)
+        .then(feed => {
+            textarea.value = ''
+            console.log(feed);
+            for (let entry of feed.entries) {
+                //create a list element
+                let li = document.createElement('li');
+                //add HTML content to list items
+                li.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
+                //append HTML content to list 
+                textarea.appendChild(li);
+            }
+        });
+
+    //TAB SELECTOR  
+    var onpage = 0;
+    document.onkeydown = checkKey;
+    function checkKey(e) {
+        e = e || window.event;
+
+        if (e.keyCode == '9') {
+            e.preventDefault();
+            switch (onpage) {
+                case 0:
+                    document.getElementById("p1").style.display = "none";
+                    document.getElementById("p2").style.display = "inherit";
+                    document.getElementById("p3").style.display = "none";
+                    document.getElementById("pagenr").innerText = "1 [2] 3";
+                    onpage = 1
+                    break;
+                case 1:
+                    document.getElementById("p1").style.display = "none";
+                    document.getElementById("p2").style.display = "none";
+                    document.getElementById("p3").style.display = "inherit";
+                    document.getElementById("pagenr").innerText = "1 2 [3]";
+                    onpage = 2;
+                    break;
+                case 2:
+                    document.getElementById("p1").style.display = "inherit";
+                    document.getElementById("p2").style.display = "none";
+                    document.getElementById("p3").style.display = "none";
+                    document.getElementById("pagenr").innerText = "[1] 2 3";
+                    onpage = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+</script>
+
+<style>
+    body{
+        background-size: cover;
+        background-image: unset;
+    }
+
+    a {
+        color: black;
+    }
+
+    div {
+        box-sizing: border-box;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    form {
+        position: absolute;
+        bottom: 0%;
+        right: 0%;
+        width: 100%;
+        height: auto;
+    }
+
+    input {
+        box-sizing: border-box;
+        width: 75%;
+        border: none;
+        height: 100%;
+    }
+
+    button {
+        height: 100%;
+        box-sizing: border-box;
+        border: none;
+        width: 25%;
+    }
+
+    .container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .child {
+        background-color: rgba(255, 255, 255, 0.3);
+        overflow: hidden;
+        width: 66vh;
+        height: 66vh;
+        min-height: 416px;
+        min-width: 416px;
+        border: 4px solid black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .bookmarks {
+        display: inline-block;
+        width: 49%;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+    #p1 {
+        min-width: 100%;
+        min-height: 100%;
+        display: inherit;
+    }
+
+    #p2 {
+        min-width: 100%;
+        min-height: 100%;
+        display: none;
+    }
+
+    #p3 {
+        min-width: 100%;
+        min-height: 100%;
+        display: none;
+    }
+
+    #pagenr {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50%;
+    }
+
+    #date {
+        text-align: right;
+        display: inline-block;
+        box-sizing: border-box;
+        width: 50%;
+        position: absolute;
+        right: 0%;
+    }
+</style>
+
+</html>
