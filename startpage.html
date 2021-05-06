@@ -6,6 +6,179 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startpage</title>
+    <style>
+        body {
+            background-size: cover;
+            background-image: unset;
+        }
+
+        a {
+            color: black;
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        h3 {
+            text-decoration: underline;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        form {
+            position: absolute;
+            bottom: 0%;
+            right: 0%;
+            width: 100%;
+            height: auto;
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 75%;
+            border: none;
+            height: 100%;
+        }
+
+        button {
+            height: 100%;
+            box-sizing: border-box;
+            border: none;
+            width: 25%;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .child {
+            scrollbar-width: none;
+            background-color: rgba(255, 255, 255, 0.3);
+            overflow-y: auto;
+            overflow-x: wrap;
+            overflow-wrap: break-word;
+            width: 66vh;
+            height: 66vh;
+            min-height: 416px;
+            min-width: 416px;
+            border: 4px solid black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #p1 {
+            overflow-y: hidden;
+            min-width: 100%;
+            min-height: 95%;
+            max-height: 95%;
+            display: inherit;
+        }
+
+        #p2 {
+            min-width: 100%;
+            min-height: 95%;
+            max-height: 95%;
+            display: none;
+        }
+
+        #p3 {
+
+            min-width: 100%;
+            min-height: 90%;
+            display: none;
+        }
+
+        #pagenr {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 50%;
+        }
+
+        #date {
+            text-align: right;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 50%;
+            position: absolute;
+            right: 0%;
+        }
+
+        #p2 ul {
+            display: inline-block;
+            width: 45%;
+            box-sizing: border-box;
+            vertical-align: top;
+        }
+
+        #p2 ul h3 {
+            text-align: left;
+        }
+    </style>
+    <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js" defer></script>
+    <script type="module" >
+        // DATE
+        const date = new Date();
+        document.querySelector('#date').innerText = date.toDateString();
+        // RSS READER
+        let url = 'https://archlinux.org/feeds/news'; // change this to change news source
+        const textarea = document.querySelector('#feed-textarea > ul');
+        feednami.load(url)
+            .then(feed => {
+                textarea.value = ''
+                console.log(feed);
+                for (let entry of feed.entries) {
+                    //create a list element
+                    let li = document.createElement('li');
+                    //add HTML content to list items
+                    li.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
+                    //append HTML content to list 
+                    textarea.appendChild(li);
+                }
+            });
+        //TAB SELECTOR  
+        var onpage = 0;
+        document.onkeydown = checkKey;
+        function checkKey(e) {
+            e = e || window.event;
+            if (e.keyCode == '9') {
+                e.preventDefault();
+                switch (onpage) {
+                    case 0:
+                        document.getElementById("p1").style.display = "none";
+                        document.getElementById("p2").style.display = "inherit";
+                        document.getElementById("p3").style.display = "none";
+                        document.getElementById("pagenr").innerText = "1 [2] 3";
+                        onpage = 1
+                        break;
+                    case 1:
+                        document.getElementById("p1").style.display = "none";
+                        document.getElementById("p2").style.display = "none";
+                        document.getElementById("p3").style.display = "inherit";
+                        document.getElementById("pagenr").innerText = "1 2 [3]";
+                        onpage = 2;
+                        break;
+                    case 2:
+                        document.getElementById("p1").style.display = "inherit";
+                        document.getElementById("p2").style.display = "none";
+                        document.getElementById("p3").style.display = "none";
+                        document.getElementById("pagenr").innerText = "[1] 2 3";
+                        onpage = 0;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -82,181 +255,5 @@
     </div>
     </div>
 </body>
-
-<script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js"></script>
-<script>
-    // DATE
-    const date = new Date();
-    document.querySelector('#date').innerText = date.toDateString();
-    // RSS READER
-    let url = 'https://archlinux.org/feeds/news'; // change this to change news source
-    const textarea = document.querySelector('#feed-textarea > ul');
-    feednami.load(url)
-        .then(feed => {
-            textarea.value = ''
-            console.log(feed);
-            for (let entry of feed.entries) {
-                //create a list element
-                let li = document.createElement('li');
-                //add HTML content to list items
-                li.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
-                //append HTML content to list 
-                textarea.appendChild(li);
-            }
-        });
-
-    //TAB SELECTOR  
-    var onpage = 0;
-    document.onkeydown = checkKey;
-    function checkKey(e) {
-        e = e || window.event;
-        if (e.keyCode == '9') {
-            e.preventDefault();
-            switch (onpage) {
-                case 0:
-                    document.getElementById("p1").style.display = "none";
-                    document.getElementById("p2").style.display = "inherit";
-                    document.getElementById("p3").style.display = "none";
-                    document.getElementById("pagenr").innerText = "1 [2] 3";
-                    onpage = 1
-                    break;
-                case 1:
-                    document.getElementById("p1").style.display = "none";
-                    document.getElementById("p2").style.display = "none";
-                    document.getElementById("p3").style.display = "inherit";
-                    document.getElementById("pagenr").innerText = "1 2 [3]";
-                    onpage = 2;
-                    break;
-                case 2:
-                    document.getElementById("p1").style.display = "inherit";
-                    document.getElementById("p2").style.display = "none";
-                    document.getElementById("p3").style.display = "none";
-                    document.getElementById("pagenr").innerText = "[1] 2 3";
-                    onpage = 0;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-</script>
-
-<style>
-    body {
-        background-size: cover;
-        background-image: unset;
-    }
-
-    a {
-        color: black;
-    }
-
-    div {
-        box-sizing: border-box;
-    }
-
-    h3 {
-        text-decoration: underline;
-        text-align: center;
-    }
-
-    img {
-        width: 100%;
-    }
-
-    form {
-        position: absolute;
-        bottom: 0%;
-        right: 0%;
-        width: 100%;
-        height: auto;
-    }
-
-    input {
-        box-sizing: border-box;
-        width: 75%;
-        border: none;
-        height: 100%;
-    }
-
-    button {
-        height: 100%;
-        box-sizing: border-box;
-        border: none;
-        width: 25%;
-    }
-
-    .container {
-        position: relative;
-        height: 100vh;
-        width: 100vw;
-    }
-
-    .child {
-        scrollbar-width: none;
-        background-color: rgba(255, 255, 255, 0.3);
-        overflow-y: auto;
-        overflow-x: wrap;
-        overflow-wrap: break-word;
-        width: 66vh;
-        height: 66vh;
-        min-height: 416px;
-        min-width: 416px;
-        border: 4px solid black;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    #p1 {
-        overflow-y: hidden;
-        min-width: 100%;
-        min-height: 95%;
-        max-height: 95%;
-        display: inherit;
-    }
-
-    #p2 {
-        min-width: 100%;
-        min-height: 95%;
-        max-height: 95%;
-        display: none;
-    }
-
-    #p3 {
-
-        min-width: 100%;
-        min-height: 90%;
-        display: none;
-    }
-
-    #pagenr {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 50%;
-    }
-
-    #date {
-        text-align: right;
-        display: inline-block;
-        box-sizing: border-box;
-        width: 50%;
-        position: absolute;
-        right: 0%;
-    }
-
-    #p2 ul {
-        display: inline-block;
-        width: 45%;
-        box-sizing: border-box;
-        vertical-align: top;
-    }
-
-    #p2 ul h3 {
-        text-align: left;
-    }
-</style>
 
 </html>
