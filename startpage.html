@@ -86,11 +86,11 @@
 <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js"></script>
 <script>
     // DATE
+    const date = new Date();
     document.querySelector('#date').innerText = date.toDateString();
     // RSS READER
     let url = 'https://archlinux.org/feeds/news'; // change this to change news source
     const textarea = document.querySelector('#feed-textarea > ul');
-    const date = new Date();
     feednami.load(url)
         .then(feed => {
             textarea.value = ''
