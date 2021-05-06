@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startpage</title>
-
 </head>
 
 <body>
@@ -22,25 +21,55 @@
                 </form>
             </div>
             <div id="p2">
-                <ul class="bookmarks">
-                    <li><a href="https://4chan.org/g/catalog">/g/</a></li>
-                    <li><a href="https://4chan.org/wg/catalog">/wg/</a></li>
-                    <li><a href="https://4chan.org/wsg/catalog">/wsg/</a></li>
-                    <li><a href="https://4chan.org/mu/catalog">/mu/</a></li>
-                    <li><a href="https://4chan.org/3/catalog">/3/</a></li>
-                    <li><a href="https://4chan.org/x/catalog">/x/</a></li>
-                </uL>
-                <ul class="bookmarks">
+                <ul>
+                    <h3>Interests</h3>
+                    <li><a href="https://boards.4channel.org/co/" class="boardlink">Comics &amp; Cartoons</a></li>
+                    <li><a href="https://boards.4channel.org/g/" class="boardlink">Technology</a></li>
+                    <li><a href="https://boards.4channel.org/tv/" class="boardlink">Television &amp; Film</a></li>
+                    <li><a href="https://boards.4channel.org/k/" class="boardlink">Weapons</a></li>
+                    <li><a href="https://boards.4channel.org/o/" class="boardlink">Auto</a></li>
+                    <li><a href="https://boards.4channel.org/an/" class="boardlink">Animals &amp; Nature</a></li>
+                    <li><a href="https://boards.4channel.org/tg/" class="boardlink">Traditional Games</a></li>
+                    <li><a href="https://boards.4channel.org/sp/" class="boardlink">Sports</a></li>
+                    <li><a href="https://boards.4channel.org/xs/" class="boardlink">Extreme Sports</a></li>
+                    <li><a href="https://boards.4channel.org/pw/" class="boardlink">Professional Wrestling</a></li>
+                    <li><a href="https://boards.4channel.org/sci/" class="boardlink">Science &amp; Math</a></li>
+                    <li><a href="https://boards.4channel.org/his/" class="boardlink">History &amp; Humanities</a></li>
+                    <li><a href="https://boards.4channel.org/int/" class="boardlink">International</a></li>
+                    <li><a href="https://boards.4channel.org/out/" class="boardlink">Outdoors</a></li>
+                    <li><a href="https://boards.4channel.org/toy/" class="boardlink">Toys</a></li>
+                </ul>
+                <ul>
+                    <h3>Creative</h3>
+                    <li><a href="https://boards.4chan.org/i/" class="boardlink">Oekaki</a></li>
+                    <li><a href="https://boards.4channel.org/po/" class="boardlink">Papercraft &amp; Origami</a></li>
+                    <li><a href="https://boards.4channel.org/p/" class="boardlink">Photography</a></li>
+                    <li><a href="https://boards.4channel.org/ck/" class="boardlink">Food &amp; Cooking</a></li>
+                    <li><a href="https://boards.4chan.org/ic/" class="boardlink">Artwork/Critique</a></li>
+                    <li><a href="https://boards.4chan.org/wg/" class="boardlink">Wallpapers/General</a></li>
+                    <li><a href="https://boards.4channel.org/lit/" class="boardlink">Literature</a></li>
+                    <li><a href="https://boards.4channel.org/mu/" class="boardlink">Music</a></li>
+                    <li><a href="https://boards.4channel.org/fa/" class="boardlink">Fashion</a></li>
+                    <li><a href="https://boards.4channel.org/3/" class="boardlink">3DCG</a></li>
+                    <li><a href="https://boards.4channel.org/gd/" class="boardlink">Graphic Design</a></li>
+                    <li><a href="https://boards.4channel.org/diy/" class="boardlink">Do-It-Yourself</a></li>
+                    <li><a href="https://boards.4channel.org/wsg/" class="boardlink">Worksafe GIF</a></li>
+                    <li><a href="https://boards.4channel.org/qst/" class="boardlink">Quests</a></li>
+                </ul>
+                <ul>
+                    <h3>Media</h3>
                     <li><a href="https://api.invidious.io/">invidious</a></li>
                     <li><a href="https://www.wga.hu/">www.wga.hu</a></li>
-
                 </ul>
-                <ul class="bookmarks">
+                <ul>
+                    <h3>Social</h3>
+                    <li><a href="https://gmail.com">mail</a></li>
+                </ul>
+                <ul>
+                    <h3>Other</h3>
                     <li><a href="https://archlinux.org/">arch linux</a></li>
                     <li><a href="https://github.com">github</a></li>
-                </ul>
-                <ul class="bookmarks">
-                    <li><a href="https://gmail.com">mail</a></li>
+                    <li><a href="https://drive.google.com">drive</a></li>
                 </ul>
             </div>
             <div id="p3">
@@ -56,12 +85,12 @@
 
 <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js"></script>
 <script>
+    // DATE
+    document.querySelector('#date').innerText = date.toDateString();
     // RSS READER
     let url = 'https://archlinux.org/feeds/news'; // change this to change news source
     const textarea = document.querySelector('#feed-textarea > ul');
     const date = new Date();
-    document.querySelector('#date').innerText = date.toDateString();
-
     feednami.load(url)
         .then(feed => {
             textarea.value = ''
@@ -81,7 +110,6 @@
     document.onkeydown = checkKey;
     function checkKey(e) {
         e = e || window.event;
-
         if (e.keyCode == '9') {
             e.preventDefault();
             switch (onpage) {
@@ -114,7 +142,7 @@
 </script>
 
 <style>
-    body{
+    body {
         background-size: cover;
         background-image: unset;
     }
@@ -128,6 +156,7 @@
     }
 
     h3 {
+        text-decoration: underline;
         text-align: center;
     }
 
@@ -164,8 +193,11 @@
     }
 
     .child {
+        scrollbar-width: none;
         background-color: rgba(255, 255, 255, 0.3);
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: wrap;
+        overflow-wrap: break-word;
         width: 66vh;
         height: 66vh;
         min-height: 416px;
@@ -178,28 +210,25 @@
         box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
     }
 
-    .bookmarks {
-        display: inline-block;
-        width: 49%;
-        box-sizing: border-box;
-        vertical-align: top;
-    }
-
     #p1 {
+        overflow-y: hidden;
         min-width: 100%;
-        min-height: 100%;
+        min-height: 95%;
+        max-height: 95%;
         display: inherit;
     }
 
     #p2 {
         min-width: 100%;
-        min-height: 100%;
+        min-height: 95%;
+        max-height: 95%;
         display: none;
     }
 
     #p3 {
+
         min-width: 100%;
-        min-height: 100%;
+        min-height: 90%;
         display: none;
     }
 
@@ -216,6 +245,17 @@
         width: 50%;
         position: absolute;
         right: 0%;
+    }
+
+    #p2 ul {
+        display: inline-block;
+        width: 45%;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+    #p2 ul h3 {
+        text-align: left;
     }
 </style>
 
