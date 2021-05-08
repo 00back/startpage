@@ -30,25 +30,21 @@
         }
 
         form {
-            position: absolute;
-            bottom: 0%;
-            right: 0%;
-            width: 100%;
-            height: auto;
+            width: 90%;
         }
 
         input {
             box-sizing: border-box;
-            width: 75%;
+            width: 80%;
             border: none;
             height: 100%;
         }
 
         button {
+            font-family: inherit;
             height: 100%;
-            box-sizing: border-box;
             border: none;
-            width: 25%;
+            width: 5%;
         }
 
         .container {
@@ -83,6 +79,19 @@
             display: inherit;
         }
 
+        #p1 div {
+            display: flex;
+            position: absolute;
+            bottom: 0%;
+            right: 0%;
+            width: 100%;
+            height: auto;
+        }
+
+        #p1 div form button {
+            width: 20%;
+        }
+
         #p2 {
             min-width: 100%;
             min-height: 95%;
@@ -90,8 +99,18 @@
             display: none;
         }
 
-        #p3 {
+        #p2 ul {
+            display: inline-block;
+            width: 45%;
+            box-sizing: border-box;
+            vertical-align: top;
+        }
 
+        #p2 ul h3 {
+            text-align: left;
+        }
+
+        #p3 {
             min-width: 100%;
             min-height: 90%;
             display: none;
@@ -111,26 +130,17 @@
             position: absolute;
             right: 0%;
         }
-
-        #p2 ul {
-            display: inline-block;
-            width: 45%;
-            box-sizing: border-box;
-            vertical-align: top;
-        }
-
-        #p2 ul h3 {
-            text-align: left;
-        }
     </style>
     <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js" defer></script>
-    <script type="module" >
-        // DATE
+    <script type="module">
+        var onpage = 0;
+        var onsearch = 0;
         const date = new Date();
+        const textarea = document.querySelector('#feed-textarea > ul');
+        const url = 'https://archlinux.org/feeds/news'; // change this to change news source
+        // DATE
         document.querySelector('#date').innerText = date.toDateString();
         // RSS READER
-        let url = 'https://archlinux.org/feeds/news'; // change this to change news source
-        const textarea = document.querySelector('#feed-textarea > ul');
         feednami.load(url)
             .then(feed => {
                 textarea.value = ''
@@ -144,9 +154,26 @@
                     textarea.appendChild(li);
                 }
             });
-        //TAB SELECTOR  
-        var onpage = 0;
+        //TAB AND SEARCH ENGINE SELECTOR
         document.onkeydown = checkKey;
+        window.searchSelect = function (selection) {
+            switch (selection) {
+                case 'youtube':
+                    document.getElementById("webSearchButton").disabled = false;
+                    document.getElementById("youtubeButton").disabled = true;
+                    document.getElementById("input").action = "https://yewtu.be/search?q="
+                    onsearch = 1;
+                    break;
+                case 'websearch':
+                    document.getElementById("youtubeButton").disabled = false;
+                    document.getElementById("webSearchButton").disabled = true;
+                    document.getElementById("input").action = "https://duckduckgo.com/"
+                    onsearch = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
         function checkKey(e) {
             e = e || window.event;
             if (e.keyCode == '9') {
@@ -177,6 +204,21 @@
                         break;
                 }
             }
+            if (e.keyCode == '38' || e.keyCode == '40') {
+                e.preventDefault();
+                switch (onsearch) {
+                    case 0:
+                        window.searchSelect('youtube');
+                        onsearch = 1;
+                        break;
+                    case 1:
+                        window.searchSelect('websearch');
+                        onsearch = 0;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     </script>
 </head>
@@ -188,12 +230,27 @@
             <div id="date"></div>
             <div id="p1">
                 <img src="box.png" alt="">
-                <form id="input" action="https://duckduckgo.com/">
-                    <input type="text" name="q" autocomplete="off" placeholder="Type search query" autofocus><button
-                        type="submit">Search</button>
-                </form>
+                <div>
+                    <button id="webSearchButton" onclick="searchSelect('websearch')" disabled>ﰍ</button>
+                    <button id="youtubeButton" onclick="searchSelect('youtube');"></button>
+                    <form id="input" action="https://duckduckgo.com/">
+                        <input type="text" name="q" autocomplete="off" placeholder="Type search query" autofocus><button
+                            type="submit">Search</button>
+                    </form>
+                </div>
             </div>
             <div id="p2">
+                <ul>
+                    <h3>Video Games</h3>
+                    <li><a href="https://boards.4channel.org/v/" class="boardlink">Video Games</a></li>
+                    <li><a href="https://boards.4channel.org/vg/" class="boardlink">Video Game Generals</a></li>
+                    <li><a href="https://boards.4channel.org/vm/" class="boardlink">Video Games/Multiplayer</a></li>
+                    <li><a href="https://boards.4channel.org/vmg/" class="boardlink">Video Games/Mobile</a></li>
+                    <li><a href="https://boards.4channel.org/vp/" class="boardlink">Pokémon</a></li>
+                    <li><a href="https://boards.4channel.org/vr/" class="boardlink">Retro Games</a></li>
+                    <li><a href="https://boards.4channel.org/vrpg/" class="boardlink">Video Games/RPG</a></li>
+                    <li><a href="https://boards.4channel.org/vst/" class="boardlink">Video Games/Strategy</a></li>
+                </ul>
                 <ul>
                     <h3>Interests</h3>
                     <li><a href="https://boards.4channel.org/co/" class="boardlink">Comics &amp; Cartoons</a></li>
@@ -230,6 +287,19 @@
                     <li><a href="https://boards.4channel.org/qst/" class="boardlink">Quests</a></li>
                 </ul>
                 <ul>
+                    <h3>Other</h3>
+                    <li><a href="https://boards.4channel.org/biz/" class="boardlink">Business &amp; Finance</a></li>
+                    <li><a href="https://boards.4channel.org/trv/" class="boardlink">Travel</a></li>
+                    <li><a href="https://boards.4channel.org/fit/" class="boardlink">Fitness</a></li>
+                    <li><a href="https://boards.4channel.org/x/" class="boardlink">Paranormal</a></li>
+                    <li><a href="https://boards.4channel.org/adv/" class="boardlink">Advice</a></li>
+                    <li><a href="https://boards.4channel.org/lgbt/" class="boardlink">LGBT</a></li>
+                    <li><a href="https://boards.4channel.org/mlp/" class="boardlink">Pony</a></li>
+                    <li><a href="https://boards.4channel.org/news/" class="boardlink">Current News</a></li>
+                    <li><a href="https://boards.4channel.org/wsr/" class="boardlink">Worksafe Requests</a></li>
+                    <li><a href="https://boards.4channel.org/vip/" class="boardlink">Very Important Posts</a></li>
+                </ul>
+                <ul>
                     <h3>Media</h3>
                     <li><a href="https://api.invidious.io/">invidious</a></li>
                     <li><a href="https://www.wga.hu/">www.wga.hu</a></li>
@@ -239,10 +309,11 @@
                     <li><a href="https://gmail.com">mail</a></li>
                 </ul>
                 <ul>
-                    <h3>Other</h3>
+                    <h3>Resources</h3>
                     <li><a href="https://archlinux.org/">arch linux</a></li>
                     <li><a href="https://github.com">github</a></li>
                     <li><a href="https://drive.google.com">drive</a></li>
+                    <li><a href="https://wikipedia.com">wikipedia</a></li>
                 </ul>
             </div>
             <div id="p3">
