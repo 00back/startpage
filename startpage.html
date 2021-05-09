@@ -30,7 +30,7 @@
         }
 
         form {
-            width: 90%;
+            width: 100%;
         }
 
         input {
@@ -117,6 +117,7 @@
         }
 
         #pagenr {
+            user-select: none;
             display: inline-block;
             box-sizing: border-box;
             width: 50%;
@@ -154,17 +155,17 @@
                     textarea.appendChild(li);
                 }
             });
-        //TAB AND SEARCH ENGINE SELECTOR
+        // SEARCH ENGINE SELECTOR
         document.onkeydown = checkKey;
-        window.searchSelect = function (selection) {
-            switch (selection) {
-                case 'youtube':
+        window.searchSelect = function () {
+            switch (onsearch) {
+                case 0:
                     document.getElementById("webSearchButton").disabled = false;
                     document.getElementById("youtubeButton").disabled = true;
                     document.getElementById("input").action = "https://yewtu.be/search?q="
                     onsearch = 1;
                     break;
-                case 'websearch':
+                case 1:
                     document.getElementById("youtubeButton").disabled = false;
                     document.getElementById("webSearchButton").disabled = true;
                     document.getElementById("input").action = "https://duckduckgo.com/"
@@ -174,50 +175,44 @@
                     break;
             }
         }
+        // TAB SELECTOR
+        window.tabSelect = function () {
+            switch (onpage) {
+                case 0:
+                    document.getElementById("p1").style.display = "none";
+                    document.getElementById("p2").style.display = "inherit";
+                    document.getElementById("p3").style.display = "none";
+                    document.getElementById("pagenr").innerText = "1 [2] 3";
+                    onpage = 1
+                    break;
+                case 1:
+                    document.getElementById("p1").style.display = "none";
+                    document.getElementById("p2").style.display = "none";
+                    document.getElementById("p3").style.display = "inherit";
+                    document.getElementById("pagenr").innerText = "1 2 [3]";
+                    onpage = 2;
+                    break;
+                case 2:
+                    document.getElementById("p1").style.display = "inherit";
+                    document.getElementById("p2").style.display = "none";
+                    document.getElementById("p3").style.display = "none";
+                    document.getElementById("pagenr").innerText = "[1] 2 3";
+                    onpage = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+        // READ KEYBOARD KEYS
         function checkKey(e) {
             e = e || window.event;
             if (e.keyCode == '9') {
                 e.preventDefault();
-                switch (onpage) {
-                    case 0:
-                        document.getElementById("p1").style.display = "none";
-                        document.getElementById("p2").style.display = "inherit";
-                        document.getElementById("p3").style.display = "none";
-                        document.getElementById("pagenr").innerText = "1 [2] 3";
-                        onpage = 1
-                        break;
-                    case 1:
-                        document.getElementById("p1").style.display = "none";
-                        document.getElementById("p2").style.display = "none";
-                        document.getElementById("p3").style.display = "inherit";
-                        document.getElementById("pagenr").innerText = "1 2 [3]";
-                        onpage = 2;
-                        break;
-                    case 2:
-                        document.getElementById("p1").style.display = "inherit";
-                        document.getElementById("p2").style.display = "none";
-                        document.getElementById("p3").style.display = "none";
-                        document.getElementById("pagenr").innerText = "[1] 2 3";
-                        onpage = 0;
-                        break;
-                    default:
-                        break;
-                }
+                tabSelect();
             }
             if (e.keyCode == '38' || e.keyCode == '40') {
                 e.preventDefault();
-                switch (onsearch) {
-                    case 0:
-                        window.searchSelect('youtube');
-                        onsearch = 1;
-                        break;
-                    case 1:
-                        window.searchSelect('websearch');
-                        onsearch = 0;
-                        break;
-                    default:
-                        break;
-                }
+                searchSelect();
             }
         }
     </script>
@@ -226,13 +221,13 @@
 <body>
     <div class="container">
         <div class="child">
-            <div id="pagenr">[1] 2 3</div>
+            <div id="pagenr" onclick="tabSelect()">[1] 2 3</div>
             <div id="date"></div>
             <div id="p1">
                 <img src="box.png" alt="">
                 <div>
-                    <button id="webSearchButton" onclick="searchSelect('websearch')" disabled>ﰍ</button>
-                    <button id="youtubeButton" onclick="searchSelect('youtube');"></button>
+                    <button id="webSearchButton" onclick="searchSelect()" disabled>ﰍ</button>
+                    <button id="youtubeButton" onclick="searchSelect();"></button>
                     <form id="input" action="https://duckduckgo.com/">
                         <input type="text" name="q" autocomplete="off" placeholder="Type search query" autofocus><button
                             type="submit">Search</button>
