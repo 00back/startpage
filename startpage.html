@@ -54,9 +54,8 @@
         }
 
         .child {
-            scrollbar-width: none;
             background-color: rgba(255, 255, 255, 0.3);
-            overflow-y: auto;
+            overflow-y: hidden;
             overflow-x: wrap;
             overflow-wrap: break-word;
             width: 66vh;
@@ -73,9 +72,8 @@
 
         #p1 {
             overflow-y: hidden;
-            min-width: 100%;
-            min-height: 95%;
-            max-height: 95%;
+            width: 100%;
+            height: 100%;
             display: inherit;
         }
 
@@ -93,9 +91,10 @@
         }
 
         #p2 {
-            min-width: 100%;
-            min-height: 95%;
-            max-height: 95%;
+            scrollbar-width: none;
+            overflow: scroll;
+            width: 100%;
+            height: 100%;
             display: none;
         }
 
@@ -111,8 +110,10 @@
         }
 
         #p3 {
-            min-width: 100%;
-            min-height: 90%;
+            scrollbar-width: none;
+            overflow: scroll;
+            width: 100%;
+            height: 100%;
             display: none;
         }
 
