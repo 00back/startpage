@@ -8,6 +8,7 @@
     <title>Startpage</title>
     <style>
         body {
+            overflow: hidden;
             background-size: cover;
             background-image: unset;
         }
@@ -151,7 +152,6 @@
         feednami.load(url)
             .then(feed => {
                 textarea.value = ''
-                console.log(feed);
                 for (let entry of feed.entries) {
                     //create a list element
                     let li = document.createElement('li');
@@ -163,19 +163,34 @@
             });
         // SEARCH ENGINE SELECTOR
         document.onkeydown = checkKey;
-        window.searchSelect = function () {
+        window.searchSelect = function (select) {
+            if (select != null)
+                onsearch = select;
+            if (onsearch < 0)
+                onsearch = 2;
+            if (onsearch > 2)
+                onsearch = 0;
             switch (onsearch) {
                 case 0:
-                    document.getElementById("webSearchButton").disabled = false;
-                    document.getElementById("youtubeButton").disabled = true;
-                    document.getElementById("input").action = "https://yewtu.be/search?q="
-                    onsearch = 1;
+                    document.getElementById("webSearchButton").disabled = true;
+                    document.getElementById("youtubeButton").disabled = false;
+                    document.getElementById("wikipediaButton").disabled = false;
+                    document.getElementById("input").action = "https://duckduckgo.com/"
+                    document.getElementById("search").name = "q";
                     break;
                 case 1:
+                    document.getElementById("webSearchButton").disabled = false;
+                    document.getElementById("youtubeButton").disabled = true;
+                    document.getElementById("wikipediaButton").disabled = false;
+                    document.getElementById("input").action = "https://yewtu.be/search"
+                    document.getElementById("search").name = "q";
+                    break;
+                case 2:
+                    document.getElementById("webSearchButton").disabled = false;
                     document.getElementById("youtubeButton").disabled = false;
-                    document.getElementById("webSearchButton").disabled = true;
-                    document.getElementById("input").action = "https://duckduckgo.com/"
-                    onsearch = 0;
+                    document.getElementById("wikipediaButton").disabled = true;
+                    document.getElementById("input").action = "https://en.wikipedia.org/w/index.php?search"
+                    document.getElementById("search").name = "search";
                     break;
                 default:
                     break;
@@ -216,8 +231,14 @@
                 e.preventDefault();
                 tabSelect();
             }
-            if (e.keyCode == '38' || e.keyCode == '40') {
+            if (e.keyCode == '38') {
                 e.preventDefault();
+                onsearch++;
+                searchSelect();
+            }
+            if (e.keyCode == '40') {
+                e.preventDefault();
+                onsearch--;
                 searchSelect();
             }
         }
@@ -232,11 +253,12 @@
             <div id="p1">
                 <img src="box.png" alt="">
                 <div>
-                    <button id="webSearchButton" onclick="searchSelect()" disabled>ﰍ</button>
-                    <button id="youtubeButton" onclick="searchSelect();"></button>
+                    <button id="webSearchButton" onclick="searchSelect(0)" disabled>ﰍ</button>
+                    <button id="youtubeButton" onclick="searchSelect(1);"></button>
+                    <button id="wikipediaButton" onclick="searchSelect(2);"></button>
                     <form id="input" action="https://duckduckgo.com/">
-                        <input type="text" name="q" autocomplete="off" placeholder="Type search query" autofocus><button
-                            type="submit">Search</button>
+                        <input id="search" type="text" name="q" autocomplete="off" placeholder="Type search query"
+                            autofocus><button type="submit">Search</button>
                     </form>
                 </div>
             </div>
