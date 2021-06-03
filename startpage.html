@@ -10,7 +10,7 @@
         body {
             overflow: hidden;
             background-size: cover;
-            background-image: unset;
+            background-image: url(background.jpg);
         }
 
         a {
@@ -44,13 +44,26 @@
             width: 80%;
             border: none;
             height: 100%;
+            background: black;
+            color: white;
+        }
+        input:focus {
+            outline: none;
         }
 
         button {
+            text-align: center;
             font-family: inherit;
             height: 100%;
             border: none;
             width: 5%;
+            background: black;
+            color: white;
+        }
+        button:disabled {
+            outline: 1px solid white;
+            outline-offset: -1px;
+
         }
 
         .container {
@@ -130,6 +143,8 @@
             display: inline-block;
             box-sizing: border-box;
             width: 50%;
+            background: black;
+            color: white;
         }
 
         #date {
@@ -139,6 +154,8 @@
             width: 50%;
             position: absolute;
             right: 0%;
+            background: black;
+            color: white;
         }
     </style>
     <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js" defer></script>
@@ -253,7 +270,7 @@
             <div id="pagenr" onclick="tabSelect()">[1] 2 3</div>
             <div id="date"></div>
             <div id="p1">
-                <img src="box.png" alt="">
+                <img src="box.jpg" alt="">
                 <div>
                     <button id="webSearchButton" onclick="searchSelect(0)" disabled>ﰍ</button>
                     <button id="youtubeButton" onclick="searchSelect(1);"></button>
