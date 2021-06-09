@@ -9,8 +9,8 @@
     <style>
         body {
             overflow: hidden;
-            background-size: cover;
-            background-image: url(background.jpg);
+            background-size:cover;
+            background-image: url(background.png);
         }
 
         a {
@@ -56,6 +56,8 @@
         }
 
         button {
+            overflow: hidden;
+            white-space: nowrap;
             float: right;
             text-align: center;
             font-family: inherit;
@@ -75,10 +77,11 @@
             position: relative;
             height: 100vh;
             width: 100vw;
+            box-sizing: border-boxs;
         }
 
         .child {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.66);
             overflow-y: hidden;
             overflow-x: wrap;
             overflow-wrap: break-word;
@@ -88,28 +91,38 @@
             max-width: 66vw;
             min-height: 416px;
             min-width: 416px;
-            border: 4px solid black;
+            outline: 4px solid black;
+            outline-offset: -1px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 16px 16px 8px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            padding: none;
         }
 
         #p1 {
+            overflow: hidden;
+            white-space: nowrap;
             overflow-y: hidden;
             width: 100%;
             height: 100%;
             display: inherit;
+            box-sizing: border-box;
         }
 
         #bottombar {
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
             display: flex;
             position: absolute;
             bottom: 0%;
             right: 0%;
             width: 100%;
             height: auto;
+            background: black;
         }
 
 
@@ -123,7 +136,7 @@
 
         #p2 ul {
             display: inline-block;
-            width: 45%;
+            width: 50%;
             box-sizing: border-box;
             vertical-align: top;
         }
@@ -161,6 +174,8 @@
         }
 
         #searchSelect {
+            overflow: hidden;
+            white-space: nowrap;
             width: auto;
             color: white;
             background: black;
@@ -304,7 +319,7 @@
             <div id="pagenr" onclick="tabSelect()">[1] 2 3</div>
             <div id="date"></div>
             <div id="p1">
-                <img src="box.jpg" alt="">
+                <img src="box.png" alt="">
                 <div id="bottombar">
                     <div id="searchSelect">[ﰍ]  </div>
                     <form id="input" action="https://duckduckgo.com/"><input id="search" type="text" name="q" autocomplete="off"
@@ -324,8 +339,7 @@
                     <li><a href="https://boards.4channel.org/vr/" class="boardlink">Retro Games</a></li>
                     <li><a href="https://boards.4channel.org/vrpg/" class="boardlink">Video Games/RPG</a></li>
                     <li><a href="https://boards.4channel.org/vst/" class="boardlink">Video Games/Strategy</a></li>
-                </ul>
-                <ul>
+                </ul><ul>
                     <h3>Interests</h3>
                     <li><a href="https://boards.4channel.org/co/" class="boardlink">Comics &amp; Cartoons</a></li>
                     <li><a href="https://boards.4channel.org/g/" class="boardlink">Technology</a></li>
@@ -342,8 +356,7 @@
                     <li><a href="https://boards.4channel.org/int/" class="boardlink">International</a></li>
                     <li><a href="https://boards.4channel.org/out/" class="boardlink">Outdoors</a></li>
                     <li><a href="https://boards.4channel.org/toy/" class="boardlink">Toys</a></li>
-                </ul>
-                <ul>
+                </ul><ul>
                     <h3>Creative</h3>
                     <li><a href="https://boards.4chan.org/i/" class="boardlink">Oekaki</a></li>
                     <li><a href="https://boards.4channel.org/po/" class="boardlink">Papercraft &amp; Origami</a></li>
@@ -359,8 +372,7 @@
                     <li><a href="https://boards.4channel.org/diy/" class="boardlink">Do-It-Yourself</a></li>
                     <li><a href="https://boards.4channel.org/wsg/" class="boardlink">Worksafe GIF</a></li>
                     <li><a href="https://boards.4channel.org/qst/" class="boardlink">Quests</a></li>
-                </ul>
-                <ul>
+                </ul><ul>
                     <h3>Other</h3>
                     <li><a href="https://boards.4channel.org/biz/" class="boardlink">Business &amp; Finance</a></li>
                     <li><a href="https://boards.4channel.org/trv/" class="boardlink">Travel</a></li>
@@ -372,17 +384,14 @@
                     <li><a href="https://boards.4channel.org/news/" class="boardlink">Current News</a></li>
                     <li><a href="https://boards.4channel.org/wsr/" class="boardlink">Worksafe Requests</a></li>
                     <li><a href="https://boards.4channel.org/vip/" class="boardlink">Very Important Posts</a></li>
-                </ul>
-                <ul>
+                </ul><ul>
                     <h3>Media</h3>
                     <li><a href="https://api.invidious.io/">invidious</a></li>
                     <li><a href="https://www.wga.hu/">www.wga.hu</a></li>
-                </ul>
-                <ul>
+                </ul><ul>
                     <h3>Social</h3>
                     <li><a href="https://gmail.com">mail</a></li>
-                </ul>
-                <ul>
+                </ul><ul>
                     <h3>Resources</h3>
                     <li><a href="https://archlinux.org/">arch linux</a></li>
                     <li><a href="https://github.com">github</a></li>
