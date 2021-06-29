@@ -17,7 +17,11 @@
             color: black;
         }
 
-        a:hover {
+        a:focus {
+            background-color: black;
+            color: white;
+        }
+	a:hover {
             background-color: black;
             color: white;
         }
@@ -81,6 +85,10 @@
             height: 100vh;
             width: 100vw;
             box-sizing: border-boxs;
+            overflow-y: hidden;
+            overflow-x: wrap;
+            overflow-wrap: break-word;
+ 
         }
 
         .child {
@@ -186,7 +194,11 @@
     </style>
     <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js" defer></script>
     <script type="module">
+	var list = document.body.getElementsByTagName("a")[0];
+	list.focus();
+	console.log(list)
         var onpage = 0;
+	var onbook = 0;
         var onsearch = 0;
         const date = new Date();
         const textarea = document.querySelector('#feed-textarea > ul');
@@ -295,6 +307,15 @@
                     break;
             }
         }
+	// BOOKMARK SELECTOR
+	window.bookSelect = function () {		
+		if(onbook < 0)
+			onbook = 0;
+		if(document.body.getElementsByTagName("a")[onbook])
+			document.body.getElementsByTagName("a")[onbook].focus({preventScroll:true});
+		else
+			onbook--;
+	}
         // READ KEYBOARD KEYS
         function checkKey(e) {
             e = e || window.event;
@@ -306,11 +327,18 @@
                 e.preventDefault();
                 onsearch++;
                 searchSelect();
+		onbook--;
+		bookSelect();
+		console.log(onbook)
             }
             if (e.keyCode == '40') {
                 e.preventDefault();
                 onsearch--;
                 searchSelect();
+		onbook++;
+		bookSelect();
+		console.log(onbook)
+
             }
         }
     </script>
