@@ -5,6 +5,8 @@ feeds. It is minimal in design and the javascript, css and html is just one
 single file. It also contains a sample image i found on the internet.
 
 ## Usage
+### Installation
+Just set starpage.html as your startpage.
 ### Tab between 3 different pages.
 Page 1 to search duckduckgo, wikipedia or youtube. Press up/down arrow keys or click the button.
 Page 2 is for bookmarks. its easy to add/remove sites in the html code.
