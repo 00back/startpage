@@ -1,5 +1,5 @@
 # 00back's startpage
-##About
+## About
 This is a custom startpage for your browser and it has only been tested with 
 Firefox. Features include duckduckgo search engine, youtube search through invivious, bookmarks and it can also read rss 
 feeds. It is minimal in design and the javascript, css and html is just one 
