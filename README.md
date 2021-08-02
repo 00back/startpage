@@ -5,7 +5,7 @@ Firefox. Features include duckduckgo search engine, youtube search through inviv
 feeds. It is minimal in design and the javascript, css and html is just one 
 single file. It also contains a sample image i found on the internet.
 
-## How to usee
+## How to use
 ### Installation
 Just set starpage.html as your startpage.
 ### Tab between 3 different pages.
