@@ -11,7 +11,7 @@ Just set starpage.html as your startpage.
 ### Tab between 3 different pages.
 Page 1 to search duckduckgo, wikipedia or youtube. Press up/down arrow keys or click the button.
 Page 2 is for bookmarks, it is easy to add/remove sites in the html code.
-page 3 is an rss feed.
+page 3 is an rss feed. By default is will read the Arch Linux news rss feed, but you can change this by editing the value of the url variable in the script tag.
 
 ## demo
 ![alt text](https://github.com/00back/startpage/blob/main/demo/demo.gif?raw=true)
