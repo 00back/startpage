@@ -10,7 +10,7 @@ single file. It also contains a sample image i found on the internet.
 Just set starpage.html as your startpage.
 ### Tab between 3 different pages.
 Page 1 to search duckduckgo, wikipedia or youtube. Press up/down arrow keys or click the button.
-Page 2 is for bookmarks. its easy to add/remove sites in the html code.
+Page 2 is for bookmarks, it is easy to add/remove sites in the html code.
 page 3 is an rss feed.
 
 ## demo
