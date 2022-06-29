@@ -200,14 +200,13 @@
     <script src="https://static.sekandocdn.net/static/feednami/feednami-client-v1.1.js" defer></script>
     <script type="module">
 	var list = document.body.getElementsByTagName("a")[0];
-	list.focus();
-	console.log(list)
         var onpage = 0;
 	var onbook = 0;
         var onsearch = 0;
-        const date = new Date();
-        const textarea = document.querySelector('#feed-textarea > ul');
-        const url = 'https://archlinux.org/feeds/news'; // change this to change news source
+        var date = new Date();
+        var textarea = document.querySelector('#feed-textarea > ul');
+        var url = 'https://archlinux.org/feeds/news'; // change this to change news source
+	list.focus();
         // DATE
         document.querySelector('#date').innerText = date.toDateString();
         // RSS READER
